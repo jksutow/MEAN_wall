@@ -1,0 +1,35 @@
+<div ng-controller = "usersController">
+  <h1>Full MEAN Wall</h1>
+  <h3 class="welcome">Welcome {{user.username}}!</h3>
+  <button ng-click="logout()">Logout</button><hr>
+
+  <div ng-controller="messagesController">
+    <form>
+      Post a message:
+      <textarea rows="8" cols="40" ng-model="newMessage.message"></textarea>
+      <input type="submit" value="Post Message" ng-click="newPost()">
+    </form>
+    <form ng-repeat="posts in allPosts | orderBy: '-createdAt'">
+      <label ng-repeat="post in posts._user"> {{post.username}} at {{posts.createdAt}}: {{posts.message}}</label>
+      <label class="comments" ng-repeat="post in posts._comment"> {{post.name}} at {{post.createdAt}}: {{post.text}}</label>
+      <textarea ng-model="newComment.text" rows="3" cols="40"></textarea>
+      <input type="submit" ng-click="comment(newComment, posts._id)" value="Post Comment">
+    </form>
+  </div>
+</div>
+
+<style media="screen">
+  h1{
+    display: inline;
+  }
+  h3.welcome{
+    display: inline;
+    margin-left: 275px;
+  }
+  label, textarea, input{
+    display: block;
+  }
+  .comments{
+    margin-left: 50px;
+  }
+</style>
